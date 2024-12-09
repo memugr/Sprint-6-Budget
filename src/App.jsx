@@ -1,5 +1,5 @@
 import "./assets/index.css";
-import { BudgetForm } from "./components/BudgetForm";
+import { BudgetForm } from "./components/formComponents/BudgetForm";
 
 function App() {
   return (
