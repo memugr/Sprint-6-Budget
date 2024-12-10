@@ -10,7 +10,7 @@ export default function HomePage() {
                     Welcome to your budget manager app!
                 </h1>
 
-                <div className=" w-full max-w-lg border-teal shadow-2xl rounded-2xl p-8 text-center">
+                <div className=" w-full max-w-lg border-teal shadow-2xl rounded-2xl p-8 text-center text-gray-900 font-sans">
                     <p className="mt-4 text-lg ">
                         Are you ready to see the budget for your next web project?
                     </p>
