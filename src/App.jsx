@@ -1,9 +1,26 @@
 import "./assets/index.css";
-import { BudgetForm } from "./components/formComponents/BudgetForm";
+import { BudgetForm } from "./pages/BudgetForm";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import HomePage from "./pages/HomePage";
+
+const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <HomePage />
+  },
+  {
+    path: "/HomePage",
+    element: <HomePage />
+  },
+  {
+    path: "/BudgetForm",
+    element: <BudgetForm />
+  }
+])
 
 function App() {
   return (
-    <BudgetForm />
+    <RouterProvider router={router} />
   )
 }
 
