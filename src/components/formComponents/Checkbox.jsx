@@ -22,7 +22,7 @@ export const Checkbox = ({ type, price }) => {
     }
 
     return (
-        <div className="card flex flex-col justify-evenly items-center shadow-2xl rounded-2xl bg-white text-gray-900">
+        <div className="card flex flex-col justify-evenly items-center shadow-2xl rounded-2xl bg-white text-gray-900 font-sans">
             <div className="flex justify-evenly items-center p-4 md:p-8 w-4/5 font-medium">
                 <div>
                     <h3 className="font-bold text-xl mb-3">{type}</h3>
