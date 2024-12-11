@@ -2,19 +2,18 @@ import "./assets/index.css";
 import { BudgetForm } from "./pages/BudgetForm";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import HomePage from "./pages/HomePage";
+import ErrorPage from "./pages/ErrorPage";
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <HomePage />,
-  },
-  {
-    path: "/HomePage",
-    element: <HomePage />
-  },
+    errorElement: <ErrorPage />
+    },
   {
     path: "/BudgetForm",
-    element: <BudgetForm />
+    element: <BudgetForm />,
+    errorElement: <ErrorPage />
   }
 ])
 
