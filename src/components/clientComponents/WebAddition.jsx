@@ -1,9 +1,9 @@
 import { useServiceContext } from "../../contexts/budgetFormProvider";
 
-export const WebAddition = () => {
+export const WebAddition = ({ customizations }) => {
     const form = useServiceContext();
 
-    const webAdditions = form.customizationArray?.filter(
+    const webAdditions = customizations?.filter(
         (element) => element.quantity > 0
     );
 
@@ -23,7 +23,6 @@ export const WebAddition = () => {
                 ))}
                 )
             </span>
-
         )
     }
 

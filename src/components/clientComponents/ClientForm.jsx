@@ -19,9 +19,6 @@ export const ClientForm = () => {
     }
 
     const saveData = () => {
-        // Validation of user inputs
-        
-
         // Send client data to context
         context.sendClientData(clientData);
         
@@ -31,6 +28,8 @@ export const ClientForm = () => {
             telephone: "",
             email: "",
         });
+
+        context.resetServicesAndCustomizations()
     };
 
     return (

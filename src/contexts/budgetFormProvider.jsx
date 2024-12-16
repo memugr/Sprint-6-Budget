@@ -12,13 +12,13 @@ export function FormProvider({ children }) {
     const [customizationArray, setCustomizationArray] = useState(customizationData);
     const [services, setServices] = useState([]);
     const [clients, setClients] = useState([])
-    
+
     useEffect(() => {
         calculateTotal();
     }, [services, customizationArray])
 
     useEffect(() => {
-        if(!services.some(item => item.type === "Web")) {
+        if (!services.some(item => item.type === "Web")) {
             setCustomizationArray(customizationData)
         }
     }, [services])
@@ -43,8 +43,8 @@ export function FormProvider({ children }) {
         const index = customizationArray.findIndex((item) => item.id === inputId)
 
         if (index !== -1) {
-            const updatedItem = {...customizationArray[index]}
-        
+            const updatedItem = { ...customizationArray[index] }
+
             if (operation === "increase") {
                 updatedItem.quantity = (updatedItem.quantity || 0) + 1;
             } else if (operation === "decrease" && updatedItem.quantity > 0) {
@@ -78,8 +78,22 @@ export function FormProvider({ children }) {
 
     function sendClientData(newClient) {
         let updatedClientsArray = [...clients]
-        updatedClientsArray.push(newClient)
+
+        // Store thr current services within each client
+        const clientWithServices = {
+            ...newClient,
+            selectedServices: [...services],
+            selectedCustomizations: [...customizationArray]
+        };
+
+        updatedClientsArray.push(clientWithServices)
         setClients(updatedClientsArray)
+    }
+
+    function resetServicesAndCustomizations() {
+        setServices([]);
+        setCustomizationArray(customizationData.map(item => ({...item, quantity: 0})));
+        setTotal(0);
     }
 
     return (
@@ -93,7 +107,8 @@ export function FormProvider({ children }) {
                 changeCustomizationQuantity,
                 sendService,
                 removeService,
-                sendClientData
+                sendClientData,
+                resetServicesAndCustomizations
             }}
         >
             {children}
