@@ -3,6 +3,7 @@ import { BudgetForm } from "./pages/BudgetForm";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import HomePage from "./pages/HomePage";
 import ErrorPage from "./pages/ErrorPage";
+import { FormProvider } from "./contexts/budgetFormProvider";
 
 const router = createBrowserRouter([
   {
@@ -19,7 +20,9 @@ const router = createBrowserRouter([
 
 function App() {
   return (
-    <RouterProvider router={router} />
+    <FormProvider>
+        <RouterProvider router={router} />
+    </FormProvider>
   )
 }
 

@@ -2,30 +2,26 @@ import { useState } from "react";
 import '/src/styles/Checkbox.css'
 import { AddCustomizationInput } from "./addCustomizationInput";
 import { useServiceContext } from "../../contexts/budgetFormProvider";
-import { customizationData } from "../../data/serviceData";
 
-export const Checkbox = ({ type, price }) => {
+export const Checkbox = ({ productData }) => {
     const [check, setCheck] = useState(false);
     const form = useServiceContext()
 
     const handleCheckbox = () => {
         if (check === false) {
-            form.sumTotal(+price)
-        } else if (type === "Web") {
-            form.sumTotal(-price - form.customization)
-            form.sumCustomization(-form.customization)
+            form.sendService(productData)
         } else {
-            form.sumTotal(-price)
+            form.removeService(productData)
         }
 
         setCheck(!check);
     }
 
     return (
-        <div className="card flex flex-col justify-evenly items-center shadow-2xl rounded-2xl bg-white text-gray-900 font-sans">
-            <div className="flex justify-evenly items-center p-4 md:p-8 w-4/5 font-medium">
+        <div className="card flex flex-col justify-evenly items-center shadow-2xl md:w-3/5 w-full rounded-2xl bg-white text-gray-900 font-sans">
+            <div className="flex flex-col justify-evenly items-center p-2 md:p-8 md:w-4/5 w-full font-medium sm:flex-row">
                 <div>
-                    <h3 className="font-bold text-xl mb-3">{type}</h3>
+                    <h3 className="font-bold text-xl mb-3">{productData.type}</h3>
                     <p className="font-medium text-base">
                         Programming a complete responsive web.
                     </p>
@@ -33,7 +29,7 @@ export const Checkbox = ({ type, price }) => {
 
                 <div className="font-extrabold text-2xl px-2 sm:px-5 md:px-16">
                     {" "}
-                    {price}€
+                    {productData.price}€
                 </div>
 
                 <div className="flex">
@@ -41,19 +37,18 @@ export const Checkbox = ({ type, price }) => {
                         className=""
                         type="checkbox"
                         onChange={handleCheckbox}
-                        value={price}
-                        id={type}
+                        value={productData.price}
+                        id={productData.type}
                     />
                     <p className="font-medium text-base mx-2">Add</p>
                 </div>
             </div>
 
-            {type === "Web" && check && customizationData.map(
+            {productData.type === "Web" && check && form.customizationArray.map(
                 (element) => (
                     <AddCustomizationInput 
                         key={element.id}
-                        option={element.type}
-                        price={element.price}
+                        customization={element}
                     />
                     )
             )}

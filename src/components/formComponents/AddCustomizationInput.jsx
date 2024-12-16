@@ -1,29 +1,27 @@
 import { useState } from "react";
 import { useServiceContext } from "../../contexts/budgetFormProvider";
 
-export const AddCustomizationInput = ({ option, price }) => {
+export const AddCustomizationInput = ({ customization }) => {
     const userForm = useServiceContext();
-    const [customization, setCustomization] = useState(0)
+    const [value, setValue] = useState(0);
 
-    // - button
+    // - decrease button
     const decreaseAmount = () => {
-        if (customization === 0) return;
+        if (value === 0) return;
 
-        setCustomization(customization - 1);
-        userForm.sumCustomization(-price);
-        userForm.sumTotal(-price)
+        setValue(value - 1);
+        userForm.changeCustomizationQuantity(customization.id, "decrease");
     }
 
-    // + button
+    // + increase button
     const increaseAmount = () => {
-        setCustomization(customization + 1);
-        userForm.sumCustomization(+price);
-        userForm.sumTotal(+price);
+        setValue(value + 1);
+        userForm.changeCustomizationQuantity(customization.id, "increase");
     }
 
     return (
         <div className="flex self-end px-20">
-            <p className="font-medium text-base">{option}</p>
+            <p className="font-medium text-base">{customization.type}</p>
             <div className="flex justify-center items-center ml-4">
                 <button
                     onClick={decreaseAmount}
@@ -32,8 +30,9 @@ export const AddCustomizationInput = ({ option, price }) => {
                     -
                 </button>
                 <input
+                    readOnly   
                     type="text"
-                    value={customization}
+                    value={value}
                     className="w-10 h-7 border-2 border-gray-300 rounded text-center"
                 />
                 <button
@@ -44,5 +43,5 @@ export const AddCustomizationInput = ({ option, price }) => {
                 </button>
             </div>
         </div>
-    )
+    );
 }
