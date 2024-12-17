@@ -7,7 +7,7 @@ export const Modal = ({ isOpen, onClose, type }) => {
     let content;
 
     if (type === "Number of pages:") {
-        content = "Add the pages that you page needs. The price of each page is 30€."
+        content = "Add the pages that your page needs. The price of each page is 30€."
     } else {
         content = "Add the languages that your page needs. The price of each language is 30€"
     }
