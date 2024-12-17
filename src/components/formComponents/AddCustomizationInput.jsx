@@ -1,9 +1,19 @@
 import { useState } from "react";
 import { useServiceContext } from "../../contexts/budgetFormProvider";
+import { Modal } from "./Modal";
 
 export const AddCustomizationInput = ({ customization }) => {
     const userForm = useServiceContext();
     const [value, setValue] = useState(0);
+    const [modal, setModal] = useState(false)
+
+    const openModal = () => {
+        setModal(true)
+    }
+    
+    const closeModal = () => {
+        setModal(false)
+    }
 
     // - decrease button
     const decreaseAmount = () => {
@@ -42,6 +52,14 @@ export const AddCustomizationInput = ({ customization }) => {
                     +
                 </button>
             </div>
+
+            <button
+                onClick={openModal}
+                className="bg-teal-500 text-white text-xs px-2 py-1 rounded self-center hover:bg-teal-600 transition-colors"
+            >
+                info
+            </button>
+            <Modal isOpen={modal} onClose={closeModal} type={customization.type} />
         </div>
     );
 }
